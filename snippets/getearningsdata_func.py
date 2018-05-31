@@ -56,6 +56,7 @@ def getearnings(b='quantopian-quandl'):
     tickers = get_tickers_from_bundle(b)
     t = pd.DataFrame(tickers)
     t.rename(columns = {0:'symbol',1:'sid'}, inplace=True)
+    df.rename(columns = {'ticker':'symbol'}, inplace=True)
     data = pd.merge(left=df, right=t,on=['symbol','symbol'], how= 'left').dropna(subset=['sid'])
     data['sid'] = data['sid'].astype(int)
     
