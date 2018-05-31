@@ -97,7 +97,8 @@ def convert_to_blaze(bundle=None, filename= '/root/data/temp/earningsdata.csv'):
         t.rename(columns = {0:'symbol',1:'sid'}, inplace=True)
         data = pd.merge(left=data, right=t,on=['symbol','symbol'], how= 'left').dropna(subset=['sid'])
         data['sid'] = data['sid'].astype(int)
-        
+        data.rename(columns = {'today':'asof_date'}, inplace=True)
+	
         cleaned_days_df = data['asof_date','sid','days']
         cleaned_days_df.rename(columns = {'days':'value'}, inplace=True)
         cleaned_days_df.to_csv('/root/data/temp/earningsdata_days_'+b+'.csv')
